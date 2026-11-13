@@ -74,7 +74,7 @@ class MainActivity : Activity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationRequest) {
             val granted = grantResults.any { it == PackageManager.PERMISSION_GRANTED }
-            geoCallback?.invoke(geoOrigin, granted, false)
+            geoCallback?.invoke(geoOrigin ?: "", granted, false)
             geoCallback = null; geoOrigin = null
             if (!granted) Toast.makeText(this, "Sin ubicación no se puede centrar Waze ni consultar el clima local.", Toast.LENGTH_LONG).show()
         }
@@ -99,7 +99,7 @@ class MainActivity : Activity() {
             else Toast.makeText(activity, "No encontré «$label» entre las aplicaciones instaladas.", Toast.LENGTH_LONG).show()
         }
         @JavascriptInterface fun launchPackage(pkg: String) = activity.runOnUiThread {
-            if (pkg.isBlank()) { showApps(); return@runOnUiThread }
+            if (pkg.isBlank()) { this@MainActivity.showApps(); return@runOnUiThread }
             val intent = packageManager.getLaunchIntentForPackage(pkg)
             if (intent != null) startActivity(intent) else Toast.makeText(activity, "La aplicación no está instalada o no tiene acceso directo.", Toast.LENGTH_LONG).show()
         }
@@ -116,8 +116,8 @@ class MainActivity : Activity() {
         @JavascriptInterface fun mediaPlayPause() = MediaNotificationListener.control("playPause", activity)
         @JavascriptInterface fun mediaNext() = MediaNotificationListener.control("next", activity)
         @JavascriptInterface fun mediaPrevious() = MediaNotificationListener.control("previous", activity)
-        @JavascriptInterface fun pickMusicApp() = activity.runOnUiThread { showApps(musicOnly = true) }
-        @JavascriptInterface fun showApps() = activity.runOnUiThread { showApps() }
+        @JavascriptInterface fun pickMusicApp() { activity.runOnUiThread { this@MainActivity.showApps(musicOnly = true) } }    
+        @JavascriptInterface fun showApps() { activity.runOnUiThread { this@MainActivity.showApps() } }
         @JavascriptInterface fun openRadio() = activity.runOnUiThread { showRadioApps() }
         @JavascriptInterface fun openBluetooth() = activity.runOnUiThread { safeStart(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) }
         @JavascriptInterface fun openSettings() = activity.runOnUiThread { safeStart(Intent(Settings.ACTION_SETTINGS)) }
