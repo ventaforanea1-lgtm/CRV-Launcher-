@@ -1,0 +1,5 @@
+COMPILAR EL APK SIN ANDROID STUDIO (GitHub, gratis)
+1. Crea un repositorio nuevo en github.com y sube TODO el contenido de esta carpeta (incluida la carpeta oculta .github).
+2. Ve a la pestaña Actions > "Compilar APK" > Run workflow.
+3. Al terminar (unos 5 min) abre la ejecución y descarga "CRV_Eduardo_Launcher_APK" (zip con app-debug.apk).
+4. Pasa app-debug.apk a la radio por USB/pendrive e instálalo (permite "orígenes desconocidos").

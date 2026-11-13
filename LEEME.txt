@@ -1,0 +1,36 @@
+CR-V LAUNCHER · EDUARDO · VERSION 2.0
+Proyecto Android Studio + interfaz WebView optimizada para 1280 x 720 (horizontal).
+
+QUÉ SE ACTUALIZÓ
+1) Waze Live Map: se carga el mapa web en vivo e interactivo de Waze. Solicita ubicación del estéreo para centrarlo. El botón Abrir Waze abre la app Waze para navegación giro a giro y búsqueda de destinos.
+2) Música: el selector permite elegir YouTube Music, Spotify, Apple Music u otra app instalada. La app Android usa MediaSessionManager para leer título, artista, álbum, estado y duración; permite anterior, reproducir/pausar y siguiente. El permiso de acceso a notificaciones debe habilitarse manualmente.
+3) Clima: consulta Open-Meteo en vivo usando la ubicación del dispositivo (sin API key). Requiere conexión y permiso de ubicación.
+4) Radio FM: busca aplicaciones instaladas cuyo nombre contenga Radio o FM y permite abrir la elegida. La radio FM propietaria del fabricante puede no aparecer con esos nombres; en ese caso hay que seleccionar su paquete/actividad específico.
+5) Android Auto: intenta abrir el paquete de Android Auto si está instalado y expone una actividad iniciable. En algunos estéreos Android Auto funciona como servicio/proyección y no tiene una pantalla que pueda abrirse desde un botón.
+6) Conserva la composición, colores, paneles e iconos del diseño aprobado.
+
+CÓMO COMPILAR EL APK
+- Abre esta carpeta en Android Studio (Giraffe o posterior).
+- Deja que Gradle sincronice. Se requiere conexión para descargar Android Gradle Plugin y androidx.webkit.
+- Build > Build Bundle(s) / APK(s) > Build APK(s).
+- El APK de depuración aparecerá en app/build/outputs/apk/debug/app-debug.apk.
+- Instálalo en la pantalla Android y selecciona “CR-V Launcher Eduardo” como aplicación de inicio predeterminada.
+
+PERMISOS Y CONFIGURACIÓN EN EL ESTÉREO
+- Acepta Ubicación cuando se solicite: Waze Live Map y clima local la necesitan.
+- En el selector musical, elige un reproductor. Cuando aparezca el aviso, entra a Acceso a notificaciones y activa “CR-V Launcher · Control multimedia”. Esto permite leer metadatos y enviar controles a la sesión multimedia activa.
+- Inicia la reproducción en YouTube Music/Spotify/Apple Music. El launcher mostrará la sesión activa que Android reporte. Algunas apps limitan metadatos o controles según su versión/estado.
+- Radio FM: pulsa el botón y selecciona la app encontrada.
+- Android Auto: su disponibilidad depende de la versión, el firmware y cómo el fabricante integre la proyección.
+
+LIMITACIONES IMPORTANTES
+- El mapa embebido de Waze es un mapa web en vivo e interactivo; para navegación giro a giro, alertas completas y búsqueda se abre la aplicación Waze.
+- Android no permite que una página web controle de forma fiable la música de otras apps. Por eso el control real está en la parte nativa Kotlin del proyecto y requiere permiso de acceso a notificaciones multimedia.
+- Open-Meteo es el proveedor meteorológico. La disponibilidad y precisión dependen de GPS, internet y cobertura del proveedor.
+- Este paquete contiene el proyecto fuente listo para compilar; no incluye un APK precompilado. No se ha podido compilar aquí porque el entorno no tiene Android SDK/Gradle instalados.
+
+ACTUALIZACIÓN DE ICONOS (v2.1)
+- Los iconos de Waze, YouTube Music, Spotify, Android Auto y Radio se obtienen desde el paquete instalado en Android mediante PackageManager.
+- Por eso se muestran los iconos oficiales que trae la versión instalada en el estéreo, no dibujos genéricos.
+- Para Radio se busca la aplicación instalada cuyo nombre contenga “Radio” o “FM”. Si el fabricante usa otro nombre, habrá que seleccionar/ajustar su paquete.
+- En la vista previa HTML abierta fuera de la app Android no se pueden recuperar los iconos instalados; se cargan al ejecutar el APK.
