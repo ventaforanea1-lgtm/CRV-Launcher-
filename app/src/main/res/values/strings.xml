@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CR-V Launcher Eduardo</string>
+    <string name="media_access_description">Permite mostrar la canción activa y controlar reproducción desde el launcher.</string>
+</resources>

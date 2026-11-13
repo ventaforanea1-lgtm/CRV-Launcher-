@@ -1,0 +1,4 @@
+<notification-listener-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:notificationTypes="ongoing"
+    android:readDescription="@string/media_access_description"
+    android:settingsActivity="com.eduardo.crvlauncher.MainActivity" />
